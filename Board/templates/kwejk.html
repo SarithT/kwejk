@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    {% for image in images %}
+        <div class="row justify-content-md-center mt-5">
+            <div class="col-md-8">
+                <div class="image-container" style="padding: 20px; border-style: solid; border-color: gray; overflow: auto">
+                {% if image.description %}
+                    <h3 style="text-align: center; padding-bottom: 10px; font-family: 'Courier New'; font-weight: bold">
+                        {{ image.description }}
+                    </h3>
+                {% endif %}
+                {% if image.image %}
+                    <img src="{{ image.image.url }}" class="img-fluid mx-auto d-block">
+                {% endif %}
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <p>added by: {{ image.addedBy.username }}</p>
+                        </div>
+                        {% if request.user.is_superuser %}
+                        <div class="col-md-6" align="right">
+                            <a href='{% url 'push_to_gif_monitor' image.id %}' class="btn btn-primary" type="button">
+                                Push to gif monitor
+                            </a>
+                            <a href='{% url 'delete_image' image.id %}' class="btn btn-secondary" type="button">Delete</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    <div class="row justify-content-md-center">
+    <div class="col-md-8">
+        <ul style="list-style-type: none; overflow: hidden">
+            {% for site in "x"|rjust:numberOfSites %}
+                {% if siteNumber == forloop.counter %}
+                <li style="display: block; cursor: pointer; float: left; padding: 16px; font-size: 20px; font-weight: bold; font-family: Asap,sans-serif;"><a href='{% url 'kwejk' forloop.counter %}' style="color: red"> {{ forloop.counter }} </a></li>
+                {% else %}
+                <li style="display: block; cursor: pointer; float: left; padding: 16px; font-size: 20px; font-weight: bold; font-family: Asap,sans-serif;"><a href='{% url 'kwejk' forloop.counter %}'> {{ forloop.counter }} </a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+
+    </div>
+
+{% endblock %}

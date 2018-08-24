@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+    <div class="row mt-4">
+        <div class="col-md-10">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <table class="table">
+                    <tr>
+                        <th>{{ form.image.label_tag }}</th>
+                        <td>{{ form.image }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ form.description.label_tag }}</th>
+                        <td>{{ form.description }}</td>
+                    </tr>
+                </table>
+                <button type="submit" class="btn btn-primary">Upload</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -12,6 +12,8 @@ urlpatterns = [
     path('kwejk/<int:siteNumber>', views.kwejk, name='kwejk'),
     path('', views.main, name='main'),
     path('gif-monitor/', views.gif_monitor, name='gif_monitor'),
+    path('gif-monitor2/', views.gif_monitor2, name='gif_monitor2'),
     path('push-to-gif-monitor/<int:pk>', views.push_to_gif_monitor, name='push_to_gif_monitor'),
+    path('push-to-gif-monitor2/<int:pk>', views.push_to_gif_monitor2, name='push_to_gif_monitor2'),
     path('delete_image/<int:pk>', views.delete_image, name='delete_image'),
 ]

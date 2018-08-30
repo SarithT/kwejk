@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="row justify-content-md-center mt-4">
+        <div class="col-md-10 ">
+            {% if image.description %}
+            <h2 style="text-align: center; margin: 20px; font-family: 'Courier New'; font-weight: bold">
+                        {{ image.description }}
+            </h2>
+            {% endif %}
+        {% if image.image %}
+            <img src="{{ image.image.url }}" class="img-fluid mx-auto d-block">
+        {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

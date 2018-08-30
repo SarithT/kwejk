@@ -17,6 +17,7 @@ class Image(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     addedBy = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True)
     isOnGifMonitor = models.BooleanField(default=False)
+    isOnGifMonitor2 = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
         if self.isOnGifMonitor:
@@ -26,6 +27,15 @@ class Image(models.Model):
                 gifImage.save()
             except ObjectDoesNotExist:
                 print("Gif monitor is currently empty")
+
+        if self.isOnGifMonitor2:
+            try:
+                gifImage = Image.objects.filter(isOnGifMonitor2=True).get()
+                gifImage.isOnGifMonitor2 = False
+                gifImage.save()
+            except ObjectDoesNotExist:
+                print("Gif monitor is currently empty")
+
         super().save(*args, **kwargs)
 
     def delete(self, using=None, keep_parents=False):

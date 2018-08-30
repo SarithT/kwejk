@@ -46,6 +46,18 @@ def gif_monitor(request):
     }
     return HttpResponse(indexTemplate.render(context, request))
 
+def gif_monitor2(request):
+    try:
+        image = Image.objects.filter(isOnGifMonitor2=True).get()
+    except ObjectDoesNotExist:
+        print("Gif monitor is currently empty")
+        image = Image.objects.none()
+    indexTemplate = loader.get_template('gif-monitor2.html')
+    context = {
+        'image': image,
+    }
+    return HttpResponse(indexTemplate.render(context, request))
+
 def pronto_timer(request):
     return render(request, "pronto-timer.html")
 
@@ -68,6 +80,13 @@ def push_to_gif_monitor(request,pk):
     image.isOnGifMonitor = True
     image.save()
     return redirect('/gif-monitor')
+
+@user_passes_test(lambda u : u.is_superuser)
+def push_to_gif_monitor2(request,pk):
+    image = Image.objects.filter(pk=pk).get()
+    image.isOnGifMonitor2 = True
+    image.save()
+    return redirect('/gif-monitor2')
 
 @user_passes_test(lambda u : u.is_superuser)
 def delete_image(request,pk):

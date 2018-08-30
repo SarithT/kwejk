@@ -15,13 +15,16 @@
                     <img src="{{ image.image.url }}" class="img-fluid mx-auto d-block">
                 {% endif %}
                     <div class="row mt-2">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <p>added by: {{ image.addedBy.username }}</p>
                         </div>
                         {% if request.user.is_superuser %}
-                        <div class="col-md-6" align="right">
+                        <div class="col-md-8" align="right">
                             <a href='{% url 'push_to_gif_monitor' image.id %}' class="btn btn-primary" type="button">
                                 Push to gif monitor
+                            </a>
+                            <a href='{% url 'push_to_gif_monitor2' image.id %}' class="btn btn-primary" type="button">
+                                Push to gif monitor 2
                             </a>
                             <a href='{% url 'delete_image' image.id %}' class="btn btn-secondary" type="button">Delete</a>
                         </div>
